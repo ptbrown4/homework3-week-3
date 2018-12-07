@@ -1,0 +1,11 @@
+.highlight {
+  background-color: #ffeb3b5e;
+}
+
+.container .hide-alert {
+    display: none;
+}
+
+.float-buttons {
+ float: right;
+}
