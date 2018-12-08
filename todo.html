@@ -30,7 +30,7 @@
       <div class="form-group">
         <input type="text" class="form-control" onchange="return toDoChange(event)" id="inputToDo" placeholder="Enter a to-do item.... like do OkCoders homework">
       </div>
-      <div id="duplicateToDo" class="alert alert-warning hide-alert" role="alert" id="alert">
+      <div id="duplicateToDo" class="alert alert-warning hide-alert" role="alert">
         You already have a todo for that!
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,24 +49,18 @@
     var toDos = []
   function addNewToDo(event){
     document.getElementById('inputToDo').value='';
-    var valueArr = toDos.map(function(item){ return item.name });
-    var isDuplicate = valueArr.some(function(item, idx){ 
-    return valueArr.indexOf(item) != idx 
-});
-      console.log(isDuplicate);
-      if (isDuplicate === toDos[toDos.length - 1]) {
-        var alert = document.getElementById("alert")
+    var duplicateName = toDos.some(t => t.name === currentToDo)
+    var alert = document.getElementById("duplicateToDo");
+      if (duplicateName) {
         alert.classList.remove("hide-alert")
-        toDos.pop();
-        drawToDos();
       } else {
+        alert.classList.add("hide-alert")
         var nextToDoLevel = toDos.length + 1
         toDos.push({name: currentToDo, level: nextToDoLevel, completed: false, highlight: false})
         drawToDos();
       }
       return false;
-    }
-
+};
     function toDoChange(event){
       currentToDo = event.target.value
     }
